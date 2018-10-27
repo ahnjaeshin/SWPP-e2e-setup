@@ -25,12 +25,14 @@ SECRET_KEY = '&c4ftde@cnlz)ok4^nnh2s&g@rl4e%rdp&*fay(=m+xl07q&u2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#### ADD YOUR HOST!! ####
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'todo.apps.TodoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
