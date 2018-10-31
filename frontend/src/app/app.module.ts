@@ -8,6 +8,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoFooterComponent } from './todo-footer/todo-footer.component';
 import { TodoHeaderComponent } from './todo-header/todo-header.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
