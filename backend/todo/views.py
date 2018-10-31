@@ -14,7 +14,7 @@ def todo(request: HttpRequest):
 
     if request.method == 'GET':
         return JsonResponse(list(Todo.objects.all().values()), safe=False)
-    else:
+    else:  # POST
         try:
             body = json.loads(request.body.decode())
             content = body['content']
@@ -25,7 +25,7 @@ def todo(request: HttpRequest):
         todo = Todo(content=content, done=done)
         todo.save()
 
-        return HttpResponse(status=201)
+        return JsonResponse({'id': todo.id, 'content': todo.content, 'done': todo.done})
 
 
 @csrf_exempt
@@ -53,7 +53,7 @@ def todo_detail(request: HttpRequest, todo_id=-1):
         todo.save()
 
         return HttpResponse(status=200)
-    else:
+    else:  # DELETE
         todo.delete()
 
         return HttpResponse(status=200)

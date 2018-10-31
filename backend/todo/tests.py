@@ -35,10 +35,13 @@ class TodoTestCase(TestCase):
     def test_post_todo(self):
         new_todo = {'content': 'bar', 'done': True}
         resp = self.post('/api/todo/', new_todo)
-        self.assertEqual(resp.status_code, 201)
+        self.assertEqual(resp.status_code, 200)
 
-        all_todos = Todo.objects.all()
-        todo = all_todos[len(all_todos) - 1]
+        resp_json = resp.json()
+        self.assertEqual(resp_json['content'], new_todo['content'])
+        self.assertEqual(resp_json['done'], new_todo['done'])
+
+        todo = Todo.objects.get(id=resp_json['id'])
         self.assertEqual(todo.content, new_todo['content'])
         self.assertEqual(todo.done, new_todo['done'])
 
