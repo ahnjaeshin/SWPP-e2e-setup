@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {TodoService} from '../services/todo.service';
 
 
 @Component({
@@ -13,13 +14,13 @@ export class TodoHeaderComponent implements OnInit {
   @Output()
   add: EventEmitter<string> = new EventEmitter();
 
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
   }
 
   addTodo() {
-    ???????
+    this.add.emit(this.newContent);
   }
 
 }

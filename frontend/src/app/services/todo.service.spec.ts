@@ -34,60 +34,58 @@ describe('TodoService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should add todo with post request', async(() => {
-    todoService.addTodo('Test3').subscribe(
-      data => {expect(data).toEqual(mockTodo); });
+  it('should add todo with post request', async(async() => {
+    const todo = await todoService.addTodo('Test3');
+    expect(todo).toEqual(mockTodo);
 
     const req = httpTestingController.expectOne(todoApi);
     expect(req.request.method).toEqual('POST');
     req.flush(mockTodo);
   }));
 
-  it('should delete todo with delete request', async(() => {
+  it('should delete todo with delete request', async(async () => {
     const todoId = 1;
     const url = `${todoApi}/${todoId}`;
 
-    todoService.deleteTodoById(todoId).subscribe();
+    await todoService.deleteTodoById(todoId);
 
     const req = httpTestingController.expectOne(url);
     expect(req.request.method).toEqual('DELETE');
     req.flush({});
   }));
 
-  it('should update todo with PUT request', async(() => {
+  it('should update todo with PUT request', async(async () => {
     const todoId = mockTodo.id;
     const url = `${todoApi}/${todoId}`;
 
-    todoService.updateTodo(mockTodo).subscribe();
+    await todoService.updateTodo(mockTodo);
 
     const req = httpTestingController.expectOne(url);
     expect(req.request.method).toEqual('PUT');
     req.flush({});
   }));
 
-  it('should get all todos with get request', async(() => {
-    todoService.getAllTodos().subscribe(
-      data => {expect(data).toEqual(mockTodoList); }
-    );
+  it('should get all todos with get request', async(async() => {
+    const todos = await todoService.getAllTodos();
+    expect(todos).toEqual(mockTodoList);
     const req = httpTestingController.expectOne(todoApi);
     expect(req.request.method).toEqual('GET');
     req.flush(mockTodoList);
   }));
 
-  it('should return empty list with get request if error', async(() => {
-    todoService.getAllTodos().subscribe(
-      data => {expect(data).toEqual([]); }
-    );
+  it('should return empty list with get request if error', async(async() => {
+    const data = await todoService.getAllTodos();
+    expect(data).toEqual([]);
     httpTestingController.expectOne(todoApi).flush(null, { status: 401, statusText: 'Unauthorized' });
   }));
 
-  it('should get all todo of specific id with get request', async(() => {
+  it('should get all todo of specific id with get request', async(async () => {
     const todoId = mockTodo.id;
     const url = `${todoApi}/${todoId}`;
 
-    todoService.getTodoById(todoId).subscribe(
-      data => {expect(data).toEqual(mockTodo); }
-    );
+    const todo = await todoService.getTodoById(todoId);
+    expect(todo).toEqual(mockTodo);
+
     const req = httpTestingController.expectOne(url);
     expect(req.request.method).toEqual('GET');
     req.flush(mockTodo);

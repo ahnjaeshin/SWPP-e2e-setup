@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from './services/todo.service';
 import { Todo } from './todo';
+import {a} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-root',
@@ -12,32 +13,22 @@ export class AppComponent implements OnInit {
 
   constructor(private todoService: TodoService) {}
 
-  public ngOnInit() {
-    this.todoService.getAllTodos().subscribe(
-        (todos) => {
-          this.todos = todos;
-        }
-      );
+  public async ngOnInit() {
+    this.todos = await this.todoService.getAllTodos();
   }
 
-  onAddTodo(todo) {
-    this.todoService.addTodo(todo).subscribe(
-        (newTodo) => {
-          this.todos = this.todos.concat(newTodo);
-        }
-      );
+  async onAddTodo(todo) {
+    const newTodo = await this.todoService.addTodo(todo);
+    this.todos = this.todos.concat(newTodo);
   }
 
-  onToggleTodo(todo: Todo) {
-    this.todoService.updateTodo(todo).subscribe(
-      () => {todo.done = !todo.done; });
+  async onToggleTodo(todo: Todo) {
+    const newTodo = await this.todoService.updateTodo(todo);
+    newTodo.done = !newTodo.done;
   }
 
-  onRemoveTodo(todo) {
-    this.todoService.deleteTodoById(todo.id).subscribe(
-        () => {
-          this.todos = this.todos.filter((t) => t.id !== todo.id);
-        }
-      );
+  async onRemoveTodo(todo) {
+    await this.todoService.deleteTodoById(todo.id);
+    this.todos = this.todos.filter((t) => t.id !== todo.id);
   }
 }

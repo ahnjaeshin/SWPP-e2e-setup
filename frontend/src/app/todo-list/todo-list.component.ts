@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Todo } from '../todo';
+import {TodoService} from '../services/todo.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -17,7 +18,7 @@ export class TodoListComponent implements OnInit {
   @Output()
   toggleComplete: EventEmitter<Todo> = new EventEmitter();
 
-  constructor() { }
+  constructor(private todoServce: TodoService) { }
 
   ngOnInit() {
   }
