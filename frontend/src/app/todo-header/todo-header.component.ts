@@ -19,7 +19,10 @@ export class TodoHeaderComponent implements OnInit {
   }
 
   addTodo() {
-    ???????
+    if(this.newContent) {
+      this.add.emit(this.newContent)
+    }
+    this.newContent = ''
   }
 
 }

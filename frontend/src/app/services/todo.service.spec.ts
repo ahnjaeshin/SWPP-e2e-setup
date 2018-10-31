@@ -45,7 +45,7 @@ describe('TodoService', () => {
 
   it('should delete todo with delete request', async(() => {
     const todoId = 1;
-    const url = `${todoApi}/${todoId}`;
+    const url = `${todoApi}${todoId}`;
 
     todoService.deleteTodoById(todoId).subscribe();
 
@@ -56,7 +56,7 @@ describe('TodoService', () => {
 
   it('should update todo with PUT request', async(() => {
     const todoId = mockTodo.id;
-    const url = `${todoApi}/${todoId}`;
+    const url = `${todoApi}${todoId}`;
 
     todoService.updateTodo(mockTodo).subscribe();
 
@@ -83,7 +83,7 @@ describe('TodoService', () => {
 
   it('should get all todo of specific id with get request', async(() => {
     const todoId = mockTodo.id;
-    const url = `${todoApi}/${todoId}`;
+    const url = `${todoApi}${todoId}`;
 
     todoService.getTodoById(todoId).subscribe(
       data => {expect(data).toEqual(mockTodo); }
