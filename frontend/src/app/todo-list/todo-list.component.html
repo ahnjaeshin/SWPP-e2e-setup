@@ -1,10 +1,10 @@
-<section class="main" *ngIf="???????">
+<section class="main" *ngIf="true">
   <ul class="todo-list">
-    <li *ngFor="???????" [class.completed]="???????">
+    <li *ngFor="let todo of todos"> <!-- TODO [class.completed]="??"> -->
       <app-todo-item
-        [todo]="???????"
-        (toggleComplete)="???????"
-        (remove)="???????"></app-todo-item>
+        [todo]="todo"
+        (toggleComplete)="onToggleTodoComplete(todo)"
+        (remove)="onRemoveTodo(todo)"></app-todo-item>
     </li>
   </ul>
 </section>

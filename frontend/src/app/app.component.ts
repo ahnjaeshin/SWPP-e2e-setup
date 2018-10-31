@@ -20,8 +20,8 @@ export class AppComponent implements OnInit {
       );
   }
 
-  onAddTodo(todo) {
-    this.todoService.addTodo(todo).subscribe(
+  onAddTodo(todoContent: string) {
+    this.todoService.addTodo(todoContent).subscribe(
         (newTodo) => {
           this.todos = this.todos.concat(newTodo);
         }
