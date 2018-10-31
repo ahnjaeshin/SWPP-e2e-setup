@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'todo.apps.TodoConfig',
     'django.contrib.admin',
     'django.contrib.auth',
