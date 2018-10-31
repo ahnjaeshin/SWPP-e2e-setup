@@ -1,6 +1,8 @@
 from django.test import TestCase, Client
 
 class TodoTestCase(TestCase):
+    def setUp(self):
+
     def test_index(self):
         client = Client()
         response = client.get('/api/')
