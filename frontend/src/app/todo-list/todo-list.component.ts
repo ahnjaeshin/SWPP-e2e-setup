@@ -1,25 +1,22 @@
-import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { Todo } from '../todo';
-
+import { Component, OnInit, Output, Input, EventEmitter } from "@angular/core";
+import { Todo } from "../todo";
+import { TodoService } from "../services/todo.service";
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  selector: "app-todo-list",
+  templateUrl: "./todo-list.component.html",
+  styleUrls: ["./todo-list.component.css"]
 })
 export class TodoListComponent implements OnInit {
+  @Input() todos: Todo[];
 
-  @Input()
-  todos: Todo[];
+  @Output() remove: EventEmitter<Todo> = new EventEmitter();
 
-  @Output()
-  remove: EventEmitter<Todo> = new EventEmitter();
+  @Output() toggleComplete: EventEmitter<Todo> = new EventEmitter();
 
-  @Output()
-  toggleComplete: EventEmitter<Todo> = new EventEmitter();
-
-  constructor() { }
+  constructor(private todoService: TodoService) {}
 
   ngOnInit() {
+    this.todoService.getTodos().subscribe(list => (this.todos = list));
   }
 
   onToggleTodoComplete(todo: Todo) {
@@ -29,5 +26,4 @@ export class TodoListComponent implements OnInit {
   onRemoveTodo(todo: Todo) {
     this.remove.emit(todo);
   }
-
 }
