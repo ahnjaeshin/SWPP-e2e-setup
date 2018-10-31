@@ -19,7 +19,13 @@ export class TodoHeaderComponent implements OnInit {
   }
 
   addTodo() {
-    ???????
+    //app component로 올려줘야 함.
+    //emit은 observable에 event를 넣어줌
+    if (!this.newContent) {
+      return;
+    }
+    this.add.emit(this.newContent);
+    this.newContent = '';
   }
 
 }
