@@ -36,7 +36,7 @@ describe('TodoService', () => {
 
   it('should add todo with post request', async(() => {
     todoService.addTodo('Test3').subscribe(
-      data => {expect(data).toEqual(mockTodo); });
+      data => { expect(data).toEqual(mockTodo); });
 
     const req = httpTestingController.expectOne(todoApi);
     expect(req.request.method).toEqual('POST');
@@ -45,7 +45,7 @@ describe('TodoService', () => {
 
   it('should delete todo with delete request', async(() => {
     const todoId = 1;
-    const url = `${todoApi}/${todoId}`;
+    const url = `${todoApi}${todoId}/`;
 
     todoService.deleteTodoById(todoId).subscribe();
 
@@ -56,7 +56,7 @@ describe('TodoService', () => {
 
   it('should update todo with PUT request', async(() => {
     const todoId = mockTodo.id;
-    const url = `${todoApi}/${todoId}`;
+    const url = `${todoApi}${todoId}/`;
 
     todoService.updateTodo(mockTodo).subscribe();
 
@@ -67,7 +67,7 @@ describe('TodoService', () => {
 
   it('should get all todos with get request', async(() => {
     todoService.getAllTodos().subscribe(
-      data => {expect(data).toEqual(mockTodoList); }
+      data => { expect(data).toEqual(mockTodoList); }
     );
     const req = httpTestingController.expectOne(todoApi);
     expect(req.request.method).toEqual('GET');
@@ -76,17 +76,17 @@ describe('TodoService', () => {
 
   it('should return empty list with get request if error', async(() => {
     todoService.getAllTodos().subscribe(
-      data => {expect(data).toEqual([]); }
+      data => { expect(data).toEqual([]); }
     );
     httpTestingController.expectOne(todoApi).flush(null, { status: 401, statusText: 'Unauthorized' });
   }));
 
   it('should get all todo of specific id with get request', async(() => {
     const todoId = mockTodo.id;
-    const url = `${todoApi}/${todoId}`;
+    const url = `${todoApi}${todoId}/`;
 
     todoService.getTodoById(todoId).subscribe(
-      data => {expect(data).toEqual(mockTodo); }
+      data => { expect(data).toEqual(mockTodo); }
     );
     const req = httpTestingController.expectOne(url);
     expect(req.request.method).toEqual('GET');
