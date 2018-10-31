@@ -13,15 +13,20 @@ export class AppComponent implements OnInit {
   constructor(private todoService: TodoService) {}
 
   public ngOnInit() {
-    this.todoService.getAllTodos().subscribe(
+    this.todoService.list().subscribe(
         (todos) => {
           this.todos = todos;
         }
       );
   }
 
-  onAddTodo(todo) {
-    this.todoService.addTodo(todo).subscribe(
+  onAddTodo(content: string) {
+    const todo = new Todo({
+      id: null,
+      done: false,
+      content,
+    });
+    this.todoService.save(todo).subscribe(
         (newTodo) => {
           this.todos = this.todos.concat(newTodo);
         }
@@ -29,12 +34,13 @@ export class AppComponent implements OnInit {
   }
 
   onToggleTodo(todo: Todo) {
-    this.todoService.updateTodo(todo).subscribe(
-      () => {todo.done = !todo.done; });
+    todo.done = !todo.done;
+    this.todoService.save(todo)
+      .subscribe(() => { });
   }
 
   onRemoveTodo(todo) {
-    this.todoService.deleteTodoById(todo.id).subscribe(
+    this.todoService.delete(todo).subscribe(
         () => {
           this.todos = this.todos.filter((t) => t.id !== todo.id);
         }

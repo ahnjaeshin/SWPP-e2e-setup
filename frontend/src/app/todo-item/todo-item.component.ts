@@ -20,11 +20,11 @@ export class TodoItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleTodoComplete(todo: Todo) {
-    this.toggleComplete.emit(todo);
+  toggleTodoComplete() {
+    this.toggleComplete.emit(this.todo);
   }
 
-  removeTodo(todo: Todo) {
-    this.remove.emit(todo);
+  removeTodo() {
+    this.remove.emit(this.todo);
   }
 }
