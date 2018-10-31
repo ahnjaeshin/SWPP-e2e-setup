@@ -19,7 +19,6 @@ export class TodoHeaderComponent implements OnInit {
   }
 
   addTodo() {
-    ???????
+    this.add.emit(this.newContent)  // make new event to Observable
   }
-
 }
