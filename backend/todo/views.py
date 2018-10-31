@@ -39,7 +39,7 @@ def todo_detail(request: HttpRequest, todo_id=-1):
         return HttpResponseNotFound()
 
     if request.method == 'GET':
-        return JsonResponse({'content': todo.content, 'done': todo.done}, safe=False)
+        return JsonResponse({'id': todo.id, 'content': todo.content, 'done': todo.done}, safe=False)
     elif request.method == 'PUT':
         try:
             body = json.loads(request.body.decode())

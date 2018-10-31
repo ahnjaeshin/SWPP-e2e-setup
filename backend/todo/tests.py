@@ -28,6 +28,7 @@ class TodoTestCase(TestCase):
 
         resp_json = resp.json()
         self.assertEqual(len(resp_json), 1)
+        self.assertEqual(resp_json[0]['id'], self.todo.id)
         self.assertEqual(resp_json[0]['content'], self.todo.content)
         self.assertEqual(resp_json[0]['done'], self.todo.done)
 
@@ -46,6 +47,7 @@ class TodoTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
 
         resp_json = resp.json()
+        self.assertEqual(resp_json['id'], self.todo.id)
         self.assertEqual(resp_json['content'], self.todo.content)
         self.assertEqual(resp_json['done'], self.todo.done)
 
