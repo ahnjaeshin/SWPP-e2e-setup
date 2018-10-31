@@ -1,9 +1,7 @@
 from django.test import TestCase, Client
+from .models import Todo
 
 class TodoTestCase(TestCase):
-    def test_index(self):
+    def setUp(self):
         client = Client()
-        response = client.get('/api/')
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content.decode(), 'Hello World!')
+        response = client.post('/api/todo/', {'content': 'AAAA'})
