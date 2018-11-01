@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class Todo(models.Model):
+    content = models.TextField(null=False)
+    done = models.BooleanField(default=False)
+    # due = models.DateTimeField()
