@@ -9,6 +9,9 @@ import { TodoFooterComponent } from './todo-footer/todo-footer.component';
 import { TodoHeaderComponent } from './todo-header/todo-header.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 
+import { TodoService } from './services/todo.service';
+import { todoServiceStub } from './services/todo-mock.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +25,9 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {provide: TodoService, useValue: todoServiceStub},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
