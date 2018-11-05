@@ -23,7 +23,7 @@ describe('TodoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [TodoService]
+      providers: [TodoService, {provide: 'API_URL', useValue: todoApi }]
     });
     httpClient = TestBed.get(HttpClient);
     httpTestingController = TestBed.get(HttpTestingController);

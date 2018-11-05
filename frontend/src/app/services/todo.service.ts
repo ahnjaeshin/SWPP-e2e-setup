@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Todo } from '../todo';
@@ -14,9 +14,7 @@ const httpOptions = {
 })
 export class TodoService {
 
-  private todoUrl = '/api/todo/';
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject('API_URL') private todoUrl: string) {}
 
   addTodo(content: string): Observable<Todo> {
     const payload = {content};
